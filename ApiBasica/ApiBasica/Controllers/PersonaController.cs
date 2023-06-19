@@ -18,7 +18,7 @@ namespace ApiBasica.Controllers
             return Ok(personas);
         }
 
-        [HttpGet("{id}")}]
+        [HttpGet("{id}")]
 
         public IActionResult ObtenerPorId(int id)
         {
@@ -79,7 +79,7 @@ namespace ApiBasica.Controllers
             db.Personas.Remove(persona);
             db.SaveChanges();
 
-            return ok(persona);
+            return Ok(persona);
         }
 
     }
