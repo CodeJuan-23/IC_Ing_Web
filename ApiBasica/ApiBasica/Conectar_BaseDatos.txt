@@ -1,0 +1,46 @@
+﻿-- ejemplo.persona definition
+CREATE TABLE `persona` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `dni` varchar(20) DEFAULT NULL,
+  `nombre` varchar(100) DEFAULT NULL,
+  `ap_paterno` varchar(100) DEFAULT NULL,
+  `ap_materno` varchar(100) DEFAULT NULL,
+  `fecha_nacimiento` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+
+INSTALAR LIBRERÍAS
+
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Abstractions
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.Relational
+Microsoft.EntityFrameworkCore.Tools
+
+/*PARA MYSQL */
+Pomelo.EntityFrameworkCore.MySql
+
+/*PARA SQL SERVER */
+Microsoft.EntityFrameworkCore.SqlServer
+
+/*PARA Postgre Sql Server */
+Npgsql.EntityFrameworkCore.PostgreSQL
+
+
+
+Scaffold-DbContext "CADENA DE CONEXIÓN;Trusted_Connection=true;Trust Server Certificate=true" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Models/DB
+
+
+
+COMANDO PARA MAPEAR LA BASE DE DATOS
+
+Scaffold-DbContext "Data Source=localhost;Initial Catalog=ejemplo;Integrated Security=True;Trusted_Connection=true;Trust Server Certificate=true" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Models/DB
+
+
+CADENA DE CONEXIÓN A MYSQL 
+
+Scaffold-DbContext "Server=localhost;Database=bd01; Uid=root" Pomelo.EntityFrameworkCore.MySql -OutPutDir Models/DBEjemplo
+
