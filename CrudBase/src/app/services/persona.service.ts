@@ -26,12 +26,12 @@ export class PersonaService {
     return this.http.get(`${this.url}/${id}`);
   }
 
-  Crear(request: PersonaModel){
-    return this.http.post(this.url, request);
+  Crear(request: PersonaModel): Observable<PersonaModel>{
+    return this.http.post<PersonaModel>(this.url, request);
   }
 
-  Actualizar(request: PersonaModel) {
-    return this.http.put(this.url, request);
+  Actualizar(request: PersonaModel): Observable<PersonaModel> {
+    return this.http.put<PersonaModel>(this.url, request);
   }
   
   Eliminar(id: number) {

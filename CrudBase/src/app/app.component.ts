@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PersonaModel } from './Models/persona.models';
 import { PersonaService } from './services/persona.service';
 
@@ -21,11 +21,21 @@ export class AppComponent implements OnInit {
   //apMaterno: string = "";
   //fechaNacimiento: string = "";
 
+  myForm:FormGroup;
 
   constructor(
+    private fb:FormBuilder,
     private _personaService: PersonaService
   ) {
-      
+      this.myForm = this.fb.group({
+      id: [0, [Validators.required]],
+      dni: [null, [Validators.required, Validators.maxLength(15), Validators.minLength(8), Validators.pattern('[0-9]')]],
+      nombre: [null, [Validators.required]],
+      apPaterno: [null, [Validators.required]],
+      apMaterno: [null, [Validators.required]],
+      fechaNacimiento: [null, [Validators.required]],
+
+      })
     }
     
 
@@ -53,6 +63,8 @@ export class AppComponent implements OnInit {
   {
     this.accion = 1;
     this.title = "NUEVA PERSONA";
+    this.myForm.reset();
+    this.myForm.get("id")?.setValue(0);
     //console.log("hizo clic en Agregar");
   }
 
@@ -60,7 +72,12 @@ export class AppComponent implements OnInit {
   {
     this.accion = 2;
     this.title = "EDITAR PERSONA";
-    console.log("Editar ==>", obj);
+    // Esto funciona con ngModel
+    // this.personaSeleccionada = obj;
+
+    // reactive forms
+    this.myForm.patchValue(obj);
+    // console.log("Editar ==>", obj);
   }
   
   Eliminar(id: number)
@@ -94,9 +111,56 @@ export class AppComponent implements OnInit {
     //console.log("apPaterno ==> ", this.apPaterno);
     //console.log("apMaterno ==> ", this.apMaterno);
     //console.log("fechaNacimiento ==> ", this.fechaNacimiento);
-    console.log(this.personaSeleccionada);
+    this.personaSeleccionada = this.myForm.getRawValue();
+    //console.log(this.personaSeleccionada);
+
+    if(this.accion == 1) // ==> nueva persona
+    {
+        this.crearPersona();
+    }
+    if(this.accion == 2) // ==> actualizar persona
+    {
+      this.actualizarPersona();
+    }
     
   }
 
+  crearPersona(){
+
+    this._personaService.Crear(this.personaSeleccionada).subscribe({
+      next: (data: PersonaModel) => {
+
+          alert("Registro creado de forma satisfactoria");
+       },
+      error: (err) => {
+         alert("HORRORRRRRRRRRRRRRRRRRRRRRRR");
+       },
+      complete: () => { 
+        this.ListarPersonas();
+        this.accion = 0;
+      }
+
+    });	
+
+  }
+
+  actualizarPersona(){
+
+    this._personaService.Actualizar(this.personaSeleccionada).subscribe({
+      next: (data: PersonaModel) => {
+
+          alert("Registro actualizado de forma satisfactoria");
+       },
+      error: (err) => { 
+        alert("HORRORRRRRRRRRRRRRRRRRRRRRRR");
+      },
+      complete: () => {
+        this.ListarPersonas();
+        this.accion = 0;
+       }
+
+    });	
+
+  }
 
 }
