@@ -1,9 +1,9 @@
 
 
 <div class="container mt-5">
-  <div class="card text-bg-light mb-3">
+  <div class="card text-bg-light mb-3" *ngIf="accion != 0">
     <div class="card-header text-center">
-	     <h3 class="text-danger">CRUD PERSONA</h3>
+	     <h3 class="text-danger">{{title}}</h3>
     </div>
     <div class="card-body">
       
@@ -14,38 +14,38 @@
 		           <div class="col-6">
 		             <div class="form-group">
 		               <label for="">DNI</label>
-			             <input type="text" class="form-control">
+			             <input [(ngModel)]="personaSeleccionada.dni" name="dni" type="text" class="form-control">
 		             </div>
 	 	           </div>			
 	             <div class="col-6">
 		             <label for="">NOMBRES</label>
-		             <input type="text" class="form-control">
+		             <input [(ngModel)]="personaSeleccionada.nombre" name="nombre" type="text" class="form-control">
 	             </div>
 		         </div>
 	           <div class="row">
 		           <div class="col-6">
 		             <div class="form-group">
 		               <label for="">APELLIDO PATERNO</label>
-			             <input type="text" class="form-control">
+			             <input [(ngModel)]="personaSeleccionada.apPaterno" name="apPaterno" type="text" class="form-control">
 		             </div>
 	 	           </div>			
 	             <div class="col-6">
 		              <label for="">APELLIDO MATERNO</label>
-		              <input type="text" class="form-control">
+		              <input [(ngModel)]="personaSeleccionada.apMaterno" name="apMaterno" type="text" class="form-control">
 	             </div>	
 	           </div>
 	           <div class="row">
 		           <div class="col-6">
 		             <div class="form-group">
 		               <label for="">FECHA DE NACIMIENTO</label>
-			             <input type="text" class="form-control">
+			             <input [(ngModel)]="personaSeleccionada.fechaNacimiento" name="fechaNacimiento" type="text" class="form-control">
 		             </div>
 	 	           </div>			
 	             <div class="col-6">
-		               <button class="mt-4 ml-5 mr-5  btn btn-sn btn-primary">
+		               <button (click)= "guardar()" class="mt-4 ml-5 mr-5  btn btn-sn btn-primary">
 			             <i class="fas fa-search"></i> Guardar
 		               </button>
-	                 <button class="mt-4 ml-5 mr-5  btn btn-sn btn-danger">
+	                 <button (click)= "Cancelar()" class="mt-4 ml-5 mr-5  btn btn-sn btn-danger">
 			             <i class="fas fa-ban"></i> Cancelar
 		               </button>
 	             </div>	
@@ -93,10 +93,10 @@
 							<td> {{d.apMaterno}} </td>
 							<td> {{d.fechaNacimiento  | date:'dd/MM/yyyy'}} </td>
 							<td>
-								<button (click)= "Editar()" class="mr-5 ml-5 btn btn-sm btn-primary ">
+								<button (click)= "Editar(d)" class="mr-5 ml-5 btn btn-sm btn-primary ">
 									<i class=" fas fa-edit "></i> Editar
 								</button>
-								<button (click)= "Eliminar()" class="mr-5 ml-5 btn btn-sm btn-danger ">
+								<button (click)= "Eliminar(d.id)" class="mr-5 ml-5 btn btn-sm btn-danger ">
 									<i class=" fas fa-trash "></i> Eliminar
 								</button>
 							</td>

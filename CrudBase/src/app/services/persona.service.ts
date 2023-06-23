@@ -34,5 +34,13 @@ export class PersonaService {
     return this.http.put(this.url, request);
   }
   
+  Eliminar(id: number) {
+    // https://localhost:7299/api/Persona/id
+    // this.url + id.toString()
+    // `${this.url}/id`
+
+    return this.http.delete(`${this.url}/${id}`);
+  }
+
 
 }
