@@ -1,4 +1,5 @@
 ﻿using ApiBasica.Models.DBEjemplo;
+using ApiBasica.Models.RequestResponse;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -26,7 +27,7 @@ namespace ApiBasica.Controllers
          return Ok(persona);
         }
 
-        [HttpPost]
+        [HttpPost]  //crear nuevo registro
 
         public IActionResult Crear([FromBody] Persona request)
         {
@@ -48,7 +49,57 @@ namespace ApiBasica.Controllers
         return Ok(request);
         }
 
-        [HttpPut]
+        [HttpPost("filter")]
+        public IActionResult Filtrar([FromBody] PersonFilterRequest request)
+        {
+            PersonFilterResponse res = new PersonFilterResponse();
+            // LISTA DE PERSONAS POR COINCIDENCIAS
+
+
+
+           //BASE DE FILTRO
+
+           /*  List<Persona> personasTotal = db.Personas.ToList();
+               List<Persona> personas = db.Personas.Where(x =>
+                 x.Dni.Contains(request.Dni)// ==> contains equivalente like
+                 //ToLower() ==>para transformar el texto todo en minuscula
+                 || string.Concat(x.Nombre, "", x.ApPaterno, "", x.ApMaterno).ToLower()
+                  .Contains(request.NombreCompleto.ToLower())).ToList();
+           
+              res.TotalRegistros = personasTotal.Count;
+              res.Personas = personas;
+
+            */
+           var query = db.Personas.Where(x => x.Id == x.Id);
+
+           if( !string.IsNullOrEmpty(request.Dni))
+            {
+                query = query.Where(x => x.Dni.Contains(request.Dni));
+            }
+
+            if (!string.IsNullOrEmpty(request.NombreCompleto))
+            {
+                query = query.Where(x =>
+                string.Concat(x.Nombre, "", x.ApPaterno, "", x.ApMaterno).ToLower()
+                .Contains(request.NombreCompleto.ToLower())
+                );
+            }
+
+            List<Persona> lst = query
+                .Skip((request.Pagina - 1) * request.Cantidad) //paginado correspondiente
+                .Take(request.Cantidad) // top 1
+                .ToList();
+
+
+            res.TotalRegistros = query.Count();
+            res.Personas = lst;
+
+
+            return Ok(res);
+        }
+
+        
+        [HttpPut]  //actualizar nuevo registro
 
         public IActionResult Actualizar([FromBody] Persona request)
         {
@@ -70,7 +121,7 @@ namespace ApiBasica.Controllers
             return Ok(request);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}")]  //eliminar el registro
 
         public IActionResult EliminarPorId(int id)
         {

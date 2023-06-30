@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PersonFilterRequest } from './Models/person-filter-request.model';
 import { PersonaModel } from './Models/persona.models';
 import { PersonaService } from './services/persona.service';
 
@@ -21,7 +22,9 @@ export class AppComponent implements OnInit {
   //apMaterno: string = "";
   //fechaNacimiento: string = "";
 
+  // formFilter:FormGroup; 
   myForm:FormGroup;
+  filter:PersonFilterRequest = new PersonFilterRequest();
 
   constructor(
     private fb:FormBuilder,
@@ -34,8 +37,13 @@ export class AppComponent implements OnInit {
       apPaterno: [null, [Validators.required]],
       apMaterno: [null, [Validators.required]],
       fechaNacimiento: [null, [Validators.required]],
+      });
 
-      })
+     // this.formFilter = this.fb.group({
+     //    dni: [null, []],
+     //    nombreCompleto: [null, []],
+     // });
+
     }
     
 
@@ -163,4 +171,14 @@ export class AppComponent implements OnInit {
 
   }
 
+  limpiarFiltro()
+  {
+    this.filter.dni="";
+    this.filter.nombreCompleto="";
+  }
+
+  buscarPorFiltro()
+  {
+
+  }  
 }
