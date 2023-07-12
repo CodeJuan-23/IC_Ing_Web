@@ -81,7 +81,10 @@
 						</tr>
 					</tbody>
 				</table>
-
+				<pagination 
+			    [totalItems]="totalRecords" [(ngModel)]="currentPage" [itemsPerPage]="2" (pageChanged)="cambioPagina($event)">
+			
+			    </pagination>
 
 	       </div>
 	     </div>
@@ -137,20 +140,20 @@
 	             </div>	
 	           </div>
 	           <div class="row">
-		           <div class="col-6">
+		            <div class="col-6">
 		             <div class="form-group">
 		               <label for="">FECHA DE NACIMIENTO</label>
 			             <input formControlName="fechaNacimiento" type="text" class="form-control">
 		             </div>
-	 	           </div>			
-	             <div class="col-6">
-		               <button [disabled]="myForm.invalid" (click)= "guardar()" class="mt-4 ml-5 mr-5  btn btn-sn btn-primary">
-			             <i class="fas fa-search"></i> Guardar
-		               </button>
-	                 <button (click)= "Cancelar()" class="mt-4 ml-5 mr-5  btn btn-sn btn-danger">
-			             <i class="fas fa-ban"></i> Cancelar
-		               </button>
-	             </div>	
+	 	            </div>			
+					<div class="col-6">
+						<button [disabled]="myForm.invalid" (click)= "guardar()" class="mt-4 ml-5 mr-5  btn btn-sn btn-primary">
+							<i class="fas fa-search"></i> Guardar
+						</button>
+						<button (click)= "Cancelar()" class="mt-4 ml-5 mr-5  btn btn-sn btn-danger">
+							<i class="fas fa-ban"></i> Cancelar
+						</button>
+					</div>	
 	           </div>
 	         </form>
 	       </div>

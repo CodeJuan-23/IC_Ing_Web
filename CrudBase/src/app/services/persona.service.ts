@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { PersonFilterRequest } from '../Models/person-filter-request.model';
+import { PersonFilterResponse } from '../Models/person-filter-response.model';
 import { PersonaModel } from '../Models/persona.models';
 
 
@@ -42,5 +44,12 @@ export class PersonaService {
     return this.http.delete(`${this.url}/${id}`);
   }
 
-
+  ListarPorFiltro(filter:PersonFilterRequest):Observable<PersonFilterResponse>
+  {
+    return this.http.post<PersonFilterResponse>
+    (
+      
+      `${this.url}/filter`,
+       filter);
+  }
 }

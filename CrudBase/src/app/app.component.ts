@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { PersonFilterRequest } from './Models/person-filter-request.model';
+import { PersonFilterResponse } from './Models/person-filter-response.model';
 import { PersonaModel } from './Models/persona.models';
 import { PersonaService } from './services/persona.service';
 
@@ -26,6 +28,9 @@ export class AppComponent implements OnInit {
   myForm:FormGroup;
   filter:PersonFilterRequest = new PersonFilterRequest();
 
+  currentPage:number = 1;
+  totalRecords: number = 0;
+
   constructor(
     private fb:FormBuilder,
     private _personaService: PersonaService
@@ -49,16 +54,34 @@ export class AppComponent implements OnInit {
 
   //document.ready ==> evento inicial
   ngOnInit(): void {
-      console.log('Inicio el event ngOnInit');
+      console.log("Inicio el event ngOnInit ****");
       this.ListarPersonas();
   }
 
+ //ESTO SOLICITA LA LISTA DE PERSONAS SIN FILTRO
+ // ListarPersonas()
+ // {
+ //   this._personaService.ListarTodo().subscribe({
+ //     next: (data: PersonaModel[]) => {
+ //
+ //       this.personas = data;
+ //
+ //      },
+ //     error: (err) => { },
+ //     complete: () => { }
+ //
+ //    });	
+ //  }
+
+/**TODO: LISTA DE PERSONAS POR FILTRO*/
+
   ListarPersonas()
   {
-    this._personaService.ListarTodo().subscribe({
-      next: (data: PersonaModel[]) => {
+    this._personaService.ListarPorFiltro(this.filter).subscribe({
+      next: (data: PersonFilterResponse) => {
 
-        this.personas = data;
+        this.personas = data.personas;
+        this.totalRecords = data.totalRegistros;
 
        },
       error: (err) => { },
@@ -179,6 +202,12 @@ export class AppComponent implements OnInit {
 
   buscarPorFiltro()
   {
-
+    this.ListarPersonas();
   }  
+
+  cambioPagina (event:PageChangedEvent){
+    //debugger;
+    this.filter.pagina = event.page;
+    this.ListarPersonas();
+  }
 }

@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   declarations: [
@@ -13,8 +13,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule 
+    FormsModule, /* ==> [(ngModel)] */
+    ReactiveFormsModule , /** ==> para implementar formularios reactivos */
+    PaginationModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
