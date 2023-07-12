@@ -1,0 +1,33 @@
+<div class="card text-bg-light mb-3">
+		<div class="card-header text-center">
+			FILTROS DE BUSQUEDA
+		</div>
+		<div class="card-body">
+		   
+				<div class="row">				
+					<div class="col-6">
+						<div class="form-group">
+							<label for="">DNI</label>
+							<input [(ngModel)]="filter.dni" name="dni" class="form-control" type="tex">
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="form-group">
+							<label for="">NOMBRE</label>
+							<input [(ngModel)]="filter.nombreCompleto" name="nombreCompleto" class="form-control" type="tex">
+						</div>
+					</div>
+					<div class="col-12 mt-3">
+						<div class="form-group">
+							<button (click)="limpiarFiltro()" class="float-end btn btn-sm btn-danger ml-5 mr-5">
+								<i class="fas fa-broom"></i>Limpiar
+							</button>
+							<button (click)="buscarPorFiltro()" class="float-end btn btn-sm btn-primary ml-5 mr-5">
+								<i class="fas fa-search"></i>Buscar
+							</button>
+						</div>
+					</div>
+				</div>
+		   
+		</div>	
+	 </div>	

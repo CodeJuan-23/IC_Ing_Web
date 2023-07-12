@@ -5,10 +5,16 @@ import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { PersonaFiltroComponent } from './pages/persona-filtro/persona-filtro.component';
+import { PersonaListaComponent } from './pages/persona-lista/persona-lista.component';
+import { PersonaRegistroComponent } from './pages/persona-registro/persona-registro.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PersonaFiltroComponent,
+    PersonaListaComponent,
+    PersonaRegistroComponent
   ],
   imports: [
     BrowserModule,

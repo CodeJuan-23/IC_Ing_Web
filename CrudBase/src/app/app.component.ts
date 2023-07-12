@@ -198,6 +198,7 @@ export class AppComponent implements OnInit {
   {
     this.filter.dni="";
     this.filter.nombreCompleto="";
+
   }
 
   buscarPorFiltro()

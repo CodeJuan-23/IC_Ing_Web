@@ -1,0 +1,66 @@
+<div class="container mt-5">
+  
+    <app-persona-filtro></app-persona-filtro>
+ 
+   <!--Lista de personas INICIO-->  	 
+   <div class="card text-bg-light mb-3">
+     <div class="card-header text-center">
+          <h3 class="text-danger">LISTADO DE PERSONAS</h3>
+     </div>
+     <div class="card-body">
+       
+          <div class="row">
+            <div class="col-12">
+              
+                 <table class="table table-bordered table-striped">
+                     <thead>
+                         <tr>
+                             <th>ID</th>
+                             <th>DNI</th>
+                             <th>Nombre</th>
+                             <th>Ap. Paterno</th>
+                             <th>Ap. Materno</th>
+                             <th>Fecha Nacimiento</th>
+                             <th>
+                                 <button (click)= "Nuevo()" class="btn btn-sm btn-primary ">
+                                     <i class=" fas fa-plus "></i> Agregar
+                                 </button>
+                             </th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr *ngFor="let d of personas">
+                             <td> {{d.id}} </td>
+                             <td> {{d.dni}} </td>
+                             <td> {{d.nombre}} </td>
+                             <td> {{d.apPaterno}} </td>
+                             <td> {{d.apMaterno}} </td>
+                             <td> {{d.fechaNacimiento  | date:'dd/MM/yyyy'}} </td>
+                             <td>
+                                 <button (click)= "Editar(d)" class="mr-5 ml-5 btn btn-sm btn-primary ">
+                                     <i class=" fas fa-edit "></i> Editar
+                                 </button>
+                                 <button (click)= "Eliminar(d.id)" class="mr-5 ml-5 btn btn-sm btn-danger ">
+                                     <i class=" fas fa-trash "></i> Eliminar
+                                 </button>
+                             </td>
+                         </tr>
+                     </tbody>
+                 </table>
+                 <pagination 
+                 [totalItems]="totalRecords" [(ngModel)]="currentPage" [itemsPerPage]="2" (pageChanged)="cambioPagina($event)">
+             
+                 </pagination>
+ 
+            </div>
+          </div>
+ 
+     </div>
+   </div>
+   <!--Lista de personas FIN-->
+ 
+   <!-- nueva persona o registro INICIO-->
+   <app-persona-registro> </app-persona-registro>
+ 
+   <!-- nueva persona o registro FIN-->
+ </div>
