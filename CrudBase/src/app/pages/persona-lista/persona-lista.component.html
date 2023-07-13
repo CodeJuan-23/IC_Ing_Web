@@ -30,8 +30,8 @@
                              </th>
                          </tr>
                      </thead>
-                     <tbody>
-                         <tr *ngFor="let d of personas">
+                     <tbody *ngIf="!load; else cargando">
+                         <tr *ngFor="let d of personas" >
                              <td> {{d.id}} </td>
                              <td> {{d.dni}} </td>
                              <td> {{d.nombre}} </td>
