@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
 
   //document.ready ==> evento inicial
   ngOnInit(): void {
-      console.log("Inicio el event ngOnInit ****");
+     // console.log("Inicio el event ngOnInit ****");
       this.ListarPersonas();
   }
 
@@ -193,6 +193,7 @@ export class AppComponent implements OnInit {
     });	
 
   }
+
 
   limpiarFiltro()
   {

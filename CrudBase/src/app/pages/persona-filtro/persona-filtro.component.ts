@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { PersonFilterRequest } from 'src/app/Models/person-filter-request.model';
 
 @Component({
@@ -7,6 +7,9 @@ import { PersonFilterRequest } from 'src/app/Models/person-filter-request.model'
   styleUrls: ['./persona-filtro.component.scss']
 })
 export class PersonaFiltroComponent {
+
+  //variable de salida
+  @Output() EnviarFiltroEmmit = new EventEmitter<PersonFilterRequest>();
 
   filter:PersonFilterRequest = new PersonFilterRequest();
   
@@ -17,10 +20,12 @@ export class PersonaFiltroComponent {
 
   }
 
-    buscarPorFiltro()
-    {
+    buscarPorFiltro(){
+      this.EnviarFiltroEmmit.emit(this.filter);
       // this.ListarPersonas();
     } 
   
 
 }
+
+

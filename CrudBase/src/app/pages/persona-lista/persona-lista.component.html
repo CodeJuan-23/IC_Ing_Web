@@ -1,6 +1,8 @@
 <div class="container mt-5">
   
-    <app-persona-filtro></app-persona-filtro>
+    <app-persona-filtro (EnviarFiltroEmmit)="recibirfiltro($event)">
+    </app-persona-filtro>
+    
  
    <!--Lista de personas INICIO-->  	 
    <div class="card text-bg-light mb-3">
@@ -22,7 +24,7 @@
                              <th>Ap. Materno</th>
                              <th>Fecha Nacimiento</th>
                              <th>
-                                 <button (click)= "Nuevo()" class="btn btn-sm btn-primary ">
+                                 <button (click)= "Nuevo(registroPersona)" class="btn btn-sm btn-primary ">
                                      <i class=" fas fa-plus "></i> Agregar
                                  </button>
                              </th>
@@ -37,7 +39,7 @@
                              <td> {{d.apMaterno}} </td>
                              <td> {{d.fechaNacimiento  | date:'dd/MM/yyyy'}} </td>
                              <td>
-                                 <button (click)= "Editar(d)" class="mr-5 ml-5 btn btn-sm btn-primary ">
+                                 <button (click)= "Editar(d,registroPersona)" class="mr-5 ml-5 btn btn-sm btn-primary ">
                                      <i class=" fas fa-edit "></i> Editar
                                  </button>
                                  <button (click)= "Eliminar(d.id)" class="mr-5 ml-5 btn btn-sm btn-danger ">
@@ -48,7 +50,7 @@
                      </tbody>
                  </table>
                  <pagination 
-                 [totalItems]="totalRecords" [(ngModel)]="currentPage" [itemsPerPage]="2" (pageChanged)="cambioPagina($event)">
+                 [totalItems]="totalRecords" [(ngModel)]="currentPage" [itemsPerPage]="filter.cantidad" (pageChanged)="cambioPagina($event)">
              
                  </pagination>
  
@@ -58,9 +60,31 @@
      </div>
    </div>
    <!--Lista de personas FIN-->
+
+</div>
+   
+   <ng-template #registroPersona>
+    <!--para variables de entrada es con corchetes [] -->
+    <!-- nueva persona o registro INICIO-->
+    <app-persona-registro
+    [title]="titleModal"
+    [accion]="accion"
+    [persona]= "personaSeleccionada"
+    (closeModalEmmit)="cerrarModal($event)"
+    > </app-persona-registro>
+
+    <!-- nueva persona o registro FIN-->
+    <!--para variables de salida es con parentesis () -->  
+   </ng-template>
+
+   <ng-template #cargando>
+        <tr>
+             <td colspan="7">
+                <h3 class="text-danger">
+                    Espere, estamos procesando la busqueda!
+                </h3>
+             </td>
+        </tr>
+   </ng-template>
+   
  
-   <!-- nueva persona o registro INICIO-->
-   <app-persona-registro> </app-persona-registro>
- 
-   <!-- nueva persona o registro FIN-->
- </div>

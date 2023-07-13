@@ -1,70 +1,71 @@
-<div class="card text-bg-light mb-3" *ngIf="accion != 0">
-    <div class="card-header text-center">
-	     <h3 class="text-danger">{{title}}</h3>
-    </div>
-    <div class="card-body">
-      
-	     <div class="row">
-	       <div class="col-12">
-	         <form [formGroup]="myForm" >
-		         <div class="row">
-		           <div class="col-6">
-		             <div class="form-group">
-		               <label for="">DNI</label>
-			             <input formControlName="dni" type="text" class="form-control">
-						 <div *ngIf="myForm.controls['dni'].errors && myForm.touched">
-							<!-- <div *ngIf="myForm.controls['dni'].errors && myForm.controls['dni'].touched"> -->
-							<small class="text-danger" *ngIf="myForm.controls['dni'].errors['required']">
-								* Este campo es requerido
-							</small>
-							<small class="text-danger" *ngIf="myForm.controls['dni'].errors['maxlength']">
-								* Maximo 15 caracteres
-							</small>
-							<small class="text-danger" *ngIf="myForm.controls['dni'].errors['minlength']">
-								* Minimo 8 caracteres
-							</small>
-							<small class="text-danger" *ngIf="myForm.controls['dni'].errors['pattern']">
-								* Solo número
-							</small>
-						 </div>
-		             </div>
-	 	           </div>			
-	             <div class="col-6">
-		             <label for="">NOMBRES</label>
-		             <input formControlName="nombre" type="text" class="form-control">
-	             </div>
-		         </div>
-	           <div class="row">
-		           <div class="col-6">
-		             <div class="form-group">
-		               <label for="">APELLIDO PATERNO</label>
-			             <input formControlName="apPaterno" type="text" class="form-control">
-		             </div>
-	 	           </div>			
-	             <div class="col-6">
-		              <label for="">APELLIDO MATERNO</label>
-		              <input formControlName="apMaterno" type="text" class="form-control">
-	             </div>	
-	           </div>
-	           <div class="row">
-		            <div class="col-6">
-		             <div class="form-group">
-		               <label for="">FECHA DE NACIMIENTO</label>
-			             <input formControlName="fechaNacimiento" type="text" class="form-control">
-		             </div>
-	 	            </div>			
-					<div class="col-6">
-						<button [disabled]="myForm.invalid" (click)= "guardar()" class="mt-4 ml-5 mr-5  btn btn-sn btn-primary">
-							<i class="fas fa-search"></i> Guardar
-						</button>
-						<button (click)= "Cancelar()" class="mt-4 ml-5 mr-5  btn btn-sn btn-danger">
-							<i class="fas fa-ban"></i> Cancelar
-						</button>
-					</div>	
-	           </div>
-	         </form>
-	       </div>
-	     </div>
 
-    </div>
+<div class="modal-header">
+    <h4 class="modal-title pull-left">{{title}}</h4>
+    <button (click)="cerrarModalRegistro(false)"  type="button" class="btn-close close pull-right" aria-label="Close" >
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
   </div>
+  <div class="modal-body">
+    <div class="row">
+        <div class="col-12">
+          <form [formGroup]="myForm" >
+              <div class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="">DNI</label>
+                      <input formControlName="dni" type="text" class="form-control">
+                      <div *ngIf="myForm.controls['dni'].errors && myForm.touched">
+                         <!-- <div *ngIf="myForm.controls['dni'].errors && myForm.controls['dni'].touched"> -->
+                         <small class="text-danger" *ngIf="myForm.controls['dni'].errors['required']">
+                             * Este campo es requerido
+                         </small>
+                         <small class="text-danger" *ngIf="myForm.controls['dni'].errors['maxlength']">
+                             * Maximo 15 caracteres
+                         </small>
+                         <small class="text-danger" *ngIf="myForm.controls['dni'].errors['minlength']">
+                             * Minimo 8 caracteres
+                         </small>
+                         <small class="text-danger" *ngIf="myForm.controls['dni'].errors['pattern']">
+                             * Solo número
+                         </small>
+                      </div>
+                  </div>
+                 </div>			
+              <div class="col-6">
+                  <label for="">NOMBRES</label>
+                  <input formControlName="nombre" type="text" class="form-control">
+              </div>
+              </div>
+            <div class="row">
+                <div class="col-6">
+                  <div class="form-group">
+                    <label for="">APELLIDO PATERNO</label>
+                      <input formControlName="apPaterno" type="text" class="form-control">
+                  </div>
+                 </div>			
+              <div class="col-6">
+                   <label for="">APELLIDO MATERNO</label>
+                   <input formControlName="apMaterno" type="text" class="form-control">
+              </div>	
+            </div>
+            <div class="row">
+                 <div class="col-6">
+                  <div class="form-group">
+                    <label for="">FECHA DE NACIMIENTO</label>
+                      <input formControlName="fechaNacimiento" type="text" class="form-control">
+                  </div>
+                  </div>			
+                 <div class="col-6">
+                     <button [disabled]="myForm.invalid" (click)= "guardar()" class="mt-4 ml-5 mr-5  btn btn-sn btn-primary">
+                         <i class="fas fa-search"></i> Guardar
+                     </button>
+                     <button (click)="cerrarModalRegistro(false)" class="mt-4 ml-5 mr-5  btn btn-sn btn-danger">
+                         <i class="fas fa-ban"></i> Cancelar
+                     </button>
+                 </div>	
+            </div>
+          </form>
+        </div>
+      </div>
+  </div>
+

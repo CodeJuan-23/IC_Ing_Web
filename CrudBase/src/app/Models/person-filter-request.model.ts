@@ -7,6 +7,6 @@ export class PersonFilterRequest{
         this.dni = "";
         this.nombreCompleto ="";
         this.pagina = 1;
-        this.cantidad = 2;  
+        this.cantidad = 3;  
     }
 }
